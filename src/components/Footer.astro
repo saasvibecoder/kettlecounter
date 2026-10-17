@@ -1,0 +1,65 @@
+---
+import SocialIcons from "./SocialIcons.astro";
+import { categories } from "../data/menu";
+const year = new Date().getFullYear();
+---
+<footer class="kc-footer">
+  <div class="wrap">
+    <div class="trustbar">
+      <ul class="tb-items">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6l7-3Z"/><path d="m9 12 2 2 4-4"/></svg><div><b>Honest Reviews</b><span>Clear pros &amp; cons</span></div></li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12V4h8l10 10-8 8L3 12Z"/><circle cx="7.5" cy="8.5" r="1.2"/></svg><div><b>Great Value</b><span>Picks from $50 to $150</span></div></li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h11v9H3zM14 9h4l3 3v3h-7"/><circle cx="7" cy="17.5" r="1.8"/><circle cx="17" cy="17.5" r="1.8"/></svg><div><b>Fast &amp; Secure</b><span>Checkout on Amazon</span></div></li>
+      </ul>
+      <a class="tb-btn" href="/#picks">Start Shopping <span aria-hidden="true">&rarr;</span></a>
+    </div>
+  </div>
+  <div class="foot">
+    <div class="wrap">
+      <div class="foot-grid">
+        <div class="fcol fbrand"><a class="f-brand" href="/"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 10h13a3 3 0 0 1 0 6h-1" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M4 10v6a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2v-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M9 10V6.5C9 5 10.5 4 12 5s1 3 2.5 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><span class="f-name"><strong>Kettle<em>Counter</em></strong><small>Better Products. Smarter Choices.</small></span></a><p class="f-desc">We compare kitchen gear from $50 to $150 so you can choose with confidence. Every pick links to Amazon for the current price.</p></div>
+        <div class="fcol"><h3>Categories</h3><ul class="flist">{categories.map(c => <li><a href={`/${c.slug}/`}>{c.name}</a></li>)}</ul></div>
+        <div class="fcol"><h3>Site</h3><ul class="flist"><li><a href="/">Home</a></li><li><a href="/about/">About</a></li><li><a href="/contact/">Contact</a></li></ul></div>
+        <div class="fcol"><h3>Follow us</h3><SocialIcons size="lg" /></div>
+      </div>
+      <div class="foot-base">
+        <div class="base-left"><p>As an Amazon Associate we earn from qualifying purchases.</p><p class="legal-links"><a href="/privacy/">Privacy Policy</a><a href="/disclosure/">Affiliate Disclosure</a></p></div>
+        <p>&copy; {year} KettleCounter. All rights reserved.</p>
+      </div>
+      <p class="tm">Prices and availability shown on Amazon may change. Amazon and the Amazon logo are trademarks of Amazon.com, Inc. or its affiliates.</p>
+    </div>
+  </div>
+</footer>
+<style>
+.kc-footer{margin-top:16px}
+.trustbar{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;background:linear-gradient(180deg,#10131b,#080a0f);border:1px solid rgba(244,124,10,.55);border-radius:14px;padding:16px 22px;box-shadow:0 10px 34px rgba(244,124,10,.28);color:#fff}
+.tb-items{display:flex;gap:34px;flex-wrap:wrap;list-style:none;margin:0;padding:0;flex:1}
+.tb-items li{display:flex;align-items:center;gap:12px;font-size:12.5px;line-height:1.3}
+.tb-items svg{width:30px;height:30px;color:#ff9f1c;flex-shrink:0}
+.tb-items b{display:block;font-size:14px}
+.tb-items span{color:rgba(255,255,255,.72)}
+.tb-btn{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(180deg,#ffb020,#f47c0a);color:#1a0d00;font-weight:700;font-size:15px;padding:12px 22px;border-radius:10px;text-decoration:none;box-shadow:0 6px 18px rgba(244,124,10,.4)}
+.tb-btn:hover{filter:brightness(1.06)}
+.tb-btn:focus-visible,.flist a:focus-visible,.legal-links a:focus-visible{outline:3px solid #ffd08a;outline-offset:2px}
+.foot{margin-top:28px;background:linear-gradient(180deg,#0c0f16,#07090d);color:#fff;border-top:4px solid transparent;border-image:linear-gradient(90deg,#8a1414,#d94f16,#f2b33d,#d94f16,#8a1414) 1}
+.f-brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:#fff}
+.f-brand svg{width:38px;height:38px;color:#ff9f1c}
+.f-name strong{display:block;font-size:22px;font-weight:800;line-height:1.1}
+.f-name em{font-style:normal;color:#ff9f1c}
+.f-name small{display:block;font-size:11px;color:rgba(255,255,255,.7)}
+.foot-base{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;border-top:1px solid rgba(255,255,255,.14);padding:16px 0 6px;font-size:12px;color:rgba(255,255,255,.78)}
+.foot-base p{margin:0}
+.base-left{display:flex;gap:18px;flex-wrap:wrap}
+.legal-links{display:flex;gap:14px}
+.legal-links a{color:inherit}
+.tm{font-size:11px;color:rgba(255,255,255,.5);margin:8px 0 0;padding-bottom:22px}
+.foot-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr auto;gap:36px;padding:30px 0 24px}
+.fbrand .f-brand{margin-bottom:12px}
+.f-desc{margin:0;font-size:13.5px;line-height:1.55;color:rgba(255,255,255,.75);max-width:36ch}
+.fcol h3{margin:0 0 12px;font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:#ff9f1c}
+.flist{list-style:none;margin:0;padding:0}
+.flist li+li{margin-top:8px}
+.flist a{color:rgba(255,255,255,.88);text-decoration:none;font-size:14px}
+.flist a:hover{color:#ff9f1c}
+@media(max-width:800px){.foot-grid{grid-template-columns:1fr 1fr;gap:26px}.fbrand,.fcol:last-child{grid-column:1/-1}.trustbar,.tb-items{justify-content:center}.foot-base{justify-content:center;text-align:center}.base-left{justify-content:center}}
+</style>

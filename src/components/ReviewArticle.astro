@@ -1,0 +1,125 @@
+---
+interface Props {
+  categoryName: string; categorySlug: string;
+  subNiche: string; subSlug: string;
+  productName: string;
+  title: string; hook: string;
+  intro?: string;
+  whatIsIt?: string;
+  featuresIntro?: string;
+  features?: string[];
+  productDescription?: string;
+  prosConsIntro?: string;
+  pros: string[]; cons: string[];
+  customerSummary?: string;
+  whyBuyIt?: string;
+  verdict?: string;
+  ctaText?: string;
+  amazonUrl?: string;
+}
+const {
+  categoryName, categorySlug, subNiche, subSlug,
+  productName,
+  title, hook,
+  intro = "Placeholder: open with the reader's real frustration in this category before naming any product.",
+  whatIsIt = `Placeholder: a plain-language explanation of what a ${subNiche.toLowerCase()} product actually is and does.`,
+  featuresIntro = "Placeholder: one sentence introducing what makes this one stand out.",
+  features = ["Placeholder feature one, with a real spec.", "Placeholder feature two.", "Placeholder feature three."],
+  productDescription = "Placeholder: a longer, more detailed description of the product and how it's used day to day.",
+  prosConsIntro = "Placeholder: one sentence on why these trade-offs matter for this price range.",
+  pros, cons,
+  customerSummary = "Placeholder: an honest summary of patterns across many real customer reviews, in your own words — never invented or quoted verbatim.",
+  whyBuyIt = "Placeholder: the strongest, most specific reason to choose this one over the alternatives.",
+  verdict = "Placeholder closing paragraph with a clear, specific recommendation.",
+  ctaText = "Placeholder: a short closing paragraph and a clear call to action.",
+  amazonUrl = "#",
+} = Astro.props;
+---
+<article class="review">
+  <nav class="crumbs" aria-label="Breadcrumb">
+    <a href="/">Home</a><span>/</span>
+    <a href={`/${categorySlug}/`}>{categoryName}</a><span>/</span>
+    <span aria-current="page">{subNiche}</span>
+  </nav>
+
+  <header class="rhead">
+    <span class="kicker">{subNiche} &middot; Buying Guide</span>
+    <h1>{title}</h1>
+    <p class="hook">{hook}</p>
+  </header>
+
+  <div class="rtop">
+    <div class="rimg" aria-hidden="true"></div>
+    <div class="rbuy">
+      <p class="price-note">Price shown on Amazon at checkout</p>
+      <a class="btn-cta" href={amazonUrl} target="_blank" rel="sponsored noopener nofollow">Check price on Amazon</a>
+      <p class="disc">As an Amazon Associate we earn from qualifying purchases.</p>
+      <div class="proscons">
+        <div><h3>Pros</h3><ul>{pros.map(p => <li>{p}</li>)}</ul></div>
+        <div><h3>Cons</h3><ul>{cons.map(c => <li>{c}</li>)}</ul></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="rbody">
+    <h2>Introduction</h2>
+    <p>{intro}</p>
+
+    <h2>What Is the {productName}?</h2>
+    <p>{whatIsIt}</p>
+
+    <h2>Key Features</h2>
+    <p>{featuresIntro}</p>
+    <ul>{features.map(f => <li>{f}</li>)}</ul>
+
+    <h2>Product Description</h2>
+    <p>{productDescription}</p>
+
+    <h2>Pros and Cons</h2>
+    <p>{prosConsIntro}</p>
+    <div class="proscons proscons-inline">
+      <div><h3>Pros</h3><ul>{pros.map(p => <li>{p}</li>)}</ul></div>
+      <div><h3>Cons</h3><ul>{cons.map(c => <li>{c}</li>)}</ul></div>
+    </div>
+
+    <h2>What Customers Are Saying</h2>
+    <p>{customerSummary}</p>
+
+    <h2>Why You Should Buy It</h2>
+    <p>{whyBuyIt}</p>
+
+    <h2>Final Verdict</h2>
+    <p>{verdict}</p>
+
+    <h2>Our Recommendation</h2>
+    <p>{ctaText}</p>
+    <a class="btn-cta btn-cta-lg" href={amazonUrl} target="_blank" rel="sponsored noopener nofollow">Check price on Amazon</a>
+  </div>
+</article>
+<style>
+.review{max-width:760px}
+.crumbs{display:flex;gap:6px;align-items:center;font-size:13px;color:var(--mute);margin:0 0 18px;flex-wrap:wrap}
+.crumbs a{color:var(--mute);text-decoration:none}
+.crumbs a:hover{color:var(--accent)}
+.crumbs span{opacity:.6}
+.crumbs [aria-current]{color:var(--ink);font-weight:600}
+.kicker{display:inline-block;font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--accent);font-weight:700;margin:0 0 10px}
+.rhead h1{font-size:clamp(26px,4vw,38px);line-height:1.15;margin:0 0 14px}
+.hook{color:var(--mute);font-size:17px;max-width:65ch;margin:0 0 26px}
+.rtop{display:grid;grid-template-columns:1.1fr 1fr;gap:24px;margin-bottom:34px}
+.rimg{width:100%;min-height:220px;border-radius:14px;background:var(--card);border:1px solid var(--line)}
+.rbuy{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px}
+.price-note{font-size:12.5px;color:var(--mute);margin:0 0 10px}
+.btn-cta{display:block;text-align:center;background:linear-gradient(180deg,#ffb020,#f47c0a);color:#1a0d00;font-weight:700;padding:13px 18px;border-radius:10px;text-decoration:none;box-shadow:0 6px 16px rgba(244,124,10,.35)}
+.btn-cta:hover{filter:brightness(1.06)}
+.btn-cta-lg{max-width:280px;margin-top:10px}
+.disc{font-size:11.5px;color:var(--mute);margin:10px 0 16px}
+.proscons{display:grid;grid-template-columns:1fr 1fr;gap:16px;border-top:1px solid var(--line);padding-top:16px}
+.proscons h3{font-size:13px;margin:0 0 8px;color:var(--ink)}
+.proscons ul{margin:0;padding-left:18px;font-size:13.5px;color:var(--mute);line-height:1.5}
+.proscons-inline{border-top:none;padding-top:4px;margin:14px 0 22px}
+.rbody h2{font-size:21px;margin:26px 0 10px}
+.rbody p,.rbody ul{color:var(--ink);line-height:1.7}
+.rbody ul{padding-left:20px}
+@media(max-width:700px){.rtop{grid-template-columns:1fr}.rimg{min-height:180px}}
+</style>

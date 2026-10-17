@@ -1,0 +1,60 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Sidebar from "../../components/Sidebar.astro";
+import ReviewArticle from "../../components/ReviewArticle.astro";
+import RelatedArticles from "../../components/RelatedArticles.astro";
+import { categories } from "../../data/menu";
+import { reviews } from "../../data/reviews";
+
+export function getStaticPaths() {
+  const paths: { params: { category: string; subniche: string }; props: { catName: string; catSlug: string; subName: string; subSlug: string } }[] = [];
+  for (const c of categories) {
+    for (const s of c.subs) {
+      paths.push({
+        params: { category: c.slug, subniche: s.toLowerCase().replace(/\s+/g, "-") },
+        props: { catName: c.name, catSlug: c.slug, subName: s, subSlug: s.toLowerCase().replace(/\s+/g, "-") },
+      });
+    }
+  }
+  return paths;
+}
+
+const { catName, catSlug, subName, subSlug } = Astro.props;
+const data = reviews[`${catSlug}/${subSlug}`];
+const productName = data?.productName ?? subName;
+const title = data?.title ?? `Best ${subName} Under $150: Our Top Pick`;
+const hook = data?.hook ?? `Our current pick for ${subName.toLowerCase()}, reviewed with honest pros and cons.`;
+---
+<BaseLayout title={`${title} — KettleCounter`} description={hook}>
+  <div class="catpage">
+    <Sidebar />
+    <main class="main">
+      <ReviewArticle
+        categoryName={catName} categorySlug={catSlug}
+        subNiche={subName} subSlug={subSlug}
+        productName={productName}
+        title={title} hook={hook}
+        intro={data?.intro}
+        whatIsIt={data?.whatIsIt}
+        featuresIntro={data?.featuresIntro}
+        features={data?.features}
+        productDescription={data?.productDescription}
+        prosConsIntro={data?.prosConsIntro}
+        pros={data?.pros ?? ["Pro one, with a real specific detail.", "Pro two.", "Pro three."]}
+        cons={data?.cons ?? ["Con one, an honest limitation.", "Con two."]}
+        customerSummary={data?.customerSummary}
+        whyBuyIt={data?.whyBuyIt}
+        verdict={data?.verdict}
+        ctaText={data?.ctaText}
+        amazonUrl={data?.amazonUrl ?? "#"}
+      />
+      <RelatedArticles slug={catSlug} exclude={subSlug} />
+    </main>
+  </div>
+</BaseLayout>
+
+<style>
+.catpage{display:flex;align-items:flex-start}
+.main{flex:1;padding:28px 20px 60px}
+@media(max-width:800px){.catpage{flex-direction:column}}
+</style>

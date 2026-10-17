@@ -1,0 +1,7 @@
+export const categories = [
+  { name: "Coffee", slug: "coffee", icon: '<path d="M4 10h12v4a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5v-4Z"/><path d="M16 11h1.5a2.5 2.5 0 0 1 0 5H16"/><path d="M8 3v3M12 3v3"/>', subs: ["Espresso","Frothers","Coffee Storage","Ice Makers","Tumblers"] },
+  { name: "Air Fryers", slug: "air-fryers", icon: '<rect x="5" y="3" width="14" height="18" rx="4"/><rect x="8" y="8" width="8" height="6" rx="1.5"/><path d="M10 18h4"/>', subs: ["Dual-Basket","AF Accessories","Combi Ovens","Multi-Cookers","Sous Vide"] },
+  { name: "Meal Prep", slug: "meal-prep", icon: '<rect x="3" y="8" width="18" height="12" rx="2.5"/><path d="M6 8V5.5h12V8M3 12.5h18M12 12.5V20"/>', subs: ["Blenders","Meal Prep Boxes","Vacuum Sealers","Thermometers","Scales"] },
+  { name: "Bake & Cookware", slug: "cookware", icon: '<path d="M5 10h14v6a4 4 0 0 1-4 4H9a4 4 0 0 1-4-4v-6Z"/><path d="M5 13H2.5M19 13h2.5M8 10V8h8v2M11 6h2"/>', subs: ["Non-Toxic","Cast Iron","Knives","Bakeware","Cookware Sets"] },
+  { name: "Organization", slug: "organization", icon: '<rect x="3" y="3" width="8" height="8" rx="2"/><rect x="13" y="3" width="8" height="8" rx="2"/><rect x="3" y="13" width="8" height="8" rx="2"/><rect x="13" y="13" width="8" height="8" rx="2"/>', subs: ["Pantry","Lighting","Dish Racks","Spice Racks","Compact Tools"] },
+];

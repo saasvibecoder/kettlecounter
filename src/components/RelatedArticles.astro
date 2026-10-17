@@ -1,0 +1,35 @@
+---
+import { categories } from "../data/menu";
+interface Props { slug: string; exclude?: string; }
+const { slug, exclude } = Astro.props;
+const cat = categories.find(c => c.slug === slug);
+const toSlug = (s: string) => s.toLowerCase().replace(/\s+/g, "-");
+const subs = cat ? cat.subs.filter(s => toSlug(s) !== exclude) : [];
+---
+{cat && (
+  <div class="related">
+    <h2>More {cat.name} reviews</h2>
+    <div class="rgrid">
+      {subs.map(s => (
+        <a class="rcard" href={`/${cat.slug}/${toSlug(s)}/`}>
+          <div class="thumb" aria-hidden="true"></div>
+          <span class="kicker">{s}</span>
+          <h4>Best {s} Under $150</h4>
+          <span class="cta">Read review &rarr;</span>
+        </a>
+      ))}
+    </div>
+  </div>
+)}
+<style>
+.related{margin-top:48px;max-width:760px}
+.related h2{font-size:21px;margin:0 0 16px}
+.rgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.rcard{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px;text-decoration:none;color:var(--ink);display:flex;flex-direction:column;gap:6px}
+.rcard:hover{border-color:var(--accent)}
+.rcard .thumb{width:100%;height:80px;border-radius:8px;background:var(--bg);border:1px solid var(--line)}
+.kicker{font-size:11px;color:var(--mute);text-transform:uppercase}
+.rcard h4{margin:0;font-size:14px}
+.cta{font-size:12.5px;font-weight:600;color:var(--accent)}
+@media(max-width:600px){.rgrid{grid-template-columns:1fr}}
+</style>

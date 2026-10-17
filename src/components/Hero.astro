@@ -1,0 +1,62 @@
+---
+---
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-copy">
+      <p class="eyebrow">Smart shopping &bull; Real reviews &bull; Amazon affiliate</p>
+      <h1>Find the Best Kitchen Gear on <em>Amazon</em></h1>
+      <p class="lead2">Discover top-rated picks, honest reviews and great deals from $50 to $150. We help you choose with confidence and save money.</p>
+      <form class="hero-search" role="search" action="/search/" method="get">
+        <input type="search" name="q" placeholder="Search espresso machines, air fryers, cookware&hellip;" aria-label="Search products">
+        <button type="submit">Search</button>
+      </form>
+      <ul class="trust">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6l7-3Z"/><path d="m9 12 2 2 4-4"/></svg><div><b>Trusted Reviews</b><span>Honest, unbiased picks</span></div></li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12V4h8l10 10-8 8L3 12Z"/><circle cx="7.5" cy="8.5" r="1.2"/></svg><div><b>Best Picks</b><span>Curated $50 to $150</span></div></li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h11v9H3zM14 9h4l3 3v3h-7"/><circle cx="7" cy="17.5" r="1.8"/><circle cx="17" cy="17.5" r="1.8"/></svg><div><b>Direct to Amazon</b><span>Secure &amp; reliable</span></div></li>
+      </ul>
+      <p class="disc">We earn a commission from qualifying Amazon purchases at no extra cost to you.</p>
+    </div>
+    <svg class="hero-art" viewBox="0 0 520 380" aria-hidden="true">
+      <defs><radialGradient id="hglow" cx="50%" cy="55%" r="55%"><stop offset="0" stop-color="#ffa62b" stop-opacity=".55"/><stop offset="1" stop-color="#ffa62b" stop-opacity="0"/></radialGradient></defs>
+      <ellipse cx="270" cy="210" rx="250" ry="170" fill="url(#hglow)"/>
+      <rect x="0" y="312" width="520" height="68" fill="#2a1608"/>
+      <rect x="0" y="304" width="520" height="9" fill="#c98a3f"/>
+      <path d="M30 310v-60a50 50 0 0 1 100 0v60Z" fill="#e8e8ec"/>
+      <path d="M30 255l-26-20 8 24Z" fill="#e8e8ec"/>
+      <path d="M130 226c30-8 32 44 0 48" fill="none" stroke="#e8e8ec" stroke-width="8" stroke-linecap="round"/>
+      <circle cx="80" cy="196" r="8" fill="#ff9f1c"/>
+      <rect x="170" y="140" width="140" height="170" rx="26" fill="#1b1b1f" stroke="#3a3a42" stroke-width="3"/>
+      <rect x="190" y="176" width="100" height="70" rx="12" fill="#0d0d10"/>
+      <rect x="190" y="176" width="100" height="70" rx="12" fill="#ff9f1c" opacity=".22"/>
+      <rect x="205" y="258" width="70" height="14" rx="7" fill="#ff9f1c"/>
+      <circle cx="205" cy="158" r="6" fill="#ff9f1c"/><circle cx="240" cy="158" r="6" fill="#555"/><circle cx="275" cy="158" r="6" fill="#555"/>
+      <rect x="340" y="196" width="140" height="114" rx="14" fill="#d9dde2"/>
+      <rect x="336" y="180" width="148" height="20" rx="8" fill="#b8bec6"/>
+      <rect x="392" y="240" width="36" height="18" rx="4" fill="#2b2b30"/>
+      <rect x="394" y="276" width="32" height="26" rx="5" fill="#fff"/>
+      <circle cx="360" cy="222" r="5" fill="#f47c0a"/><circle cx="460" cy="222" r="5" fill="#f47c0a"/>
+    </svg>
+  </div>
+</section>
+<style>
+.hero{position:relative;overflow:hidden;isolation:isolate;width:100%;padding:0;color:#fff;
+  background:radial-gradient(ellipse 60% 90% at 78% 55%,rgba(255,150,40,.5),transparent 60%),linear-gradient(100deg,#050505 0%,#180606 35%,#6e0f0f 70%,#c2410c 100%)}
+.hero-inner{max-width:100%;margin:0 auto;padding:56px 20px 44px;display:grid;grid-template-columns:1.1fr 1fr;gap:24px;align-items:center}
+.eyebrow{font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#ffb347;margin:0 0 14px}
+.hero h1{font-size:clamp(34px,5.4vw,56px);line-height:1.05;letter-spacing:-.02em;font-weight:800;margin:0 0 16px;color:#fff}
+.hero h1 em{font-style:normal;color:#ff9f1c}
+.lead2{color:rgba(255,255,255,.82);max-width:46ch;margin:0 0 22px}
+.hero-search{display:flex;background:#fff;border-radius:12px;padding:6px;max-width:520px;box-shadow:0 10px 30px rgba(0,0,0,.35)}
+.hero-search input{flex:1;min-width:0;border:0;outline:0;background:transparent;padding:10px 12px;font-size:15px;color:#16262b}
+.hero-search button{border:0;background:linear-gradient(180deg,#ffa62b,#f47c0a);color:#1a0d00;font-weight:700;padding:0 22px;border-radius:8px;cursor:pointer;font-size:15px}
+.hero-search:focus-within{outline:3px solid #ffd08a;outline-offset:2px}
+.trust{display:flex;gap:22px;flex-wrap:wrap;list-style:none;margin:22px 0 0;padding:0}
+.trust li{display:flex;gap:10px;align-items:center;font-size:13px;line-height:1.25}
+.trust svg{width:26px;height:26px;color:#ff9f1c;flex-shrink:0}
+.trust b{display:block;font-size:14px}
+.trust span{color:rgba(255,255,255,.7)}
+.hero-art{width:100%;height:auto;display:block}
+.disc{font-size:12px;color:rgba(255,255,255,.6);margin:16px 0 0}
+@media(max-width:800px){.hero-inner{grid-template-columns:1fr;padding-top:40px}.hero-art{max-width:420px;margin:0 auto}}
+</style>

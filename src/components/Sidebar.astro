@@ -1,0 +1,38 @@
+---
+import { categories } from "../data/menu";
+---
+<aside class="sidebar" id="sidebar">
+  <button class="close" id="drawerClose" aria-label="Close menu">✕</button>
+  <nav aria-label="Categories">
+    {categories.map(c => (
+      <details>
+        <summary>{c.name}</summary>
+        <ul>{c.subs.map(s => <li><a href={`/${c.slug}/${s.toLowerCase().replace(/\s+/g,'-')}/`}>{s}</a></li>)}</ul>
+      </details>
+    ))}
+  </nav>
+</aside>
+<div class="scrim" id="scrim"></div>
+<style>
+.sidebar{width:230px;flex-shrink:0;background:var(--card);border-right:1px solid var(--line);padding:18px 14px;
+  position:sticky;top:0;align-self:flex-start;max-height:100vh;overflow-y:auto}
+.close{display:none}
+summary{cursor:pointer;font-weight:600;padding:8px 4px;list-style:none}
+summary::-webkit-details-marker{display:none}
+details ul{list-style:none;margin:0 0 6px;padding-left:10px}
+details a{display:block;padding:5px 4px;color:var(--mute);text-decoration:none;font-size:14px;border-left:2px solid transparent}
+details a:hover,details a:focus-visible{color:var(--accent);border-left-color:var(--accent)}
+.scrim{display:none}
+@media(max-width:800px){
+  .sidebar{position:fixed;top:0;left:0;height:100%;transform:translateX(-105%);transition:transform .25s ease;z-index:40;overflow-y:auto}
+  .sidebar.open{transform:translateX(0)}
+  .close{display:block;background:none;border:0;font-size:18px;margin-bottom:10px;cursor:pointer;color:var(--ink)}
+  .scrim.open{display:block;position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:30}
+}
+</style>
+<script>
+const sb=document.getElementById('sidebar'),tg=document.getElementById('drawerToggle'),cl=document.getElementById('drawerClose'),sc=document.getElementById('scrim');
+function open(){sb?.classList.add('open');sc?.classList.add('open');tg?.setAttribute('aria-expanded','true');}
+function close(){sb?.classList.remove('open');sc?.classList.remove('open');tg?.setAttribute('aria-expanded','false');}
+tg?.addEventListener('click',open); cl?.addEventListener('click',close); sc?.addEventListener('click',close);
+</script>

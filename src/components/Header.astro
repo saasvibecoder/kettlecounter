@@ -1,0 +1,60 @@
+---
+import { categories } from "../data/menu";
+const toSlug = (s: string) => s.toLowerCase().replace(/\s+/g, "-");
+---
+<header>
+  <a class="brandmark" href="/">
+    <svg class="logo-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 10h13a3 3 0 0 1 0 6h-1" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M4 10v6a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2v-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M9 10V6.5C9 5 10.5 4 12 5s1 3 2.5 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+    <span class="logo">KettleCounter</span>
+  </a>
+  <span class="divider" aria-hidden="true"></span>
+  <nav class="catnav" aria-label="Categories">
+    <a class="home" href="/">Home</a>
+    {categories.map(c => (
+      <div class="dd">
+        <a class="pill" href={`/${c.slug}/`} aria-haspopup="true">
+          <span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true" set:html={c.icon} /></span>
+          {c.name}
+          <svg class="chev" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+        </a>
+        <ul class="menu">
+          <li class="all"><a href={`/${c.slug}/`}>All {c.name} &rarr;</a></li>
+          {c.subs.map(s => <li><a href={`/${c.slug}/${toSlug(s)}/`}>{s}</a></li>)}
+        </ul>
+      </div>
+    ))}
+  </nav>
+  <button class="hamburger" id="drawerToggle" aria-label="Open menu" aria-expanded="false">&#9776;</button>
+</header>
+<style>
+header{display:flex;align-items:center;padding:14px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);gap:20px}
+.brandmark{display:flex;align-items:center;gap:8px;text-decoration:none;flex-shrink:0}
+.logo-icon{width:26px;height:26px;color:var(--accent)}
+.logo{font-weight:800;font-size:20px;color:var(--ink)}
+.divider{width:1px;align-self:stretch;background:var(--line);flex-shrink:0}
+.hamburger{display:none;background:none;border:1px solid var(--line);border-radius:6px;font-size:18px;padding:4px 10px;cursor:pointer;color:var(--ink);margin-left:auto}
+.catnav{display:flex;gap:8px;flex:1;justify-content:flex-end;align-items:center;flex-wrap:nowrap}
+.catnav .home{color:var(--mute);text-decoration:none;font-size:14px;padding:8px 12px;white-space:nowrap}
+.catnav .home:hover{color:var(--accent)}
+.pill{display:inline-flex;align-items:center;gap:8px;padding:6px 14px 6px 6px;border:1px solid var(--line);border-radius:999px;background:var(--card);color:var(--ink);text-decoration:none;font-size:14px;font-weight:500;white-space:nowrap;transition:border-color .15s,transform .15s,box-shadow .15s}
+.pill .ic{display:grid;place-items:center;width:28px;height:28px;border-radius:50%;background:color-mix(in srgb,var(--accent) 14%,transparent);color:var(--accent);transition:background .15s,color .15s}
+.pill svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.pill:hover,.pill:focus-visible{border-color:var(--accent);transform:translateY(-1px);box-shadow:0 4px 12px rgba(0,0,0,.12)}
+.pill:hover .ic,.pill:focus-visible .ic{background:var(--accent);color:var(--accent-ink)}
+.pill:focus-visible{outline:3px solid var(--hi);outline-offset:2px}
+@media(max-width:1150px){.pill{padding:5px 10px 5px 5px;font-size:13px;gap:6px}.pill .ic{width:24px;height:24px}.pill svg{width:14px;height:14px}.catnav{gap:6px}}
+.dd{position:relative}
+.chev{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;opacity:.65;transition:transform .15s}
+.dd:hover .chev,.dd:focus-within .chev{transform:rotate(180deg)}
+.menu{position:absolute;top:calc(100% + 8px);left:0;min-width:230px;margin:0;padding:6px;list-style:none;background:var(--card);border:1px solid var(--line);border-radius:12px;box-shadow:0 14px 34px rgba(0,0,0,.18);z-index:50;opacity:0;visibility:hidden;transform:translateY(4px);transition:opacity .15s,transform .15s,visibility .15s}
+.menu::before{content:"";position:absolute;left:0;right:0;top:-10px;height:10px}
+.dd:hover .menu,.dd:focus-within .menu{opacity:1;visibility:visible;transform:none}
+.dd:last-child .menu{left:auto;right:0}
+.menu li a{display:block;padding:8px 12px;border-radius:8px;color:var(--ink);text-decoration:none;font-size:14px;white-space:nowrap}
+.menu li a:hover,.menu li a:focus-visible{background:color-mix(in srgb,var(--accent) 12%,transparent);color:var(--accent)}
+.menu li a:focus-visible{outline:2px solid var(--hi);outline-offset:-2px}
+.menu .all{border-bottom:1px solid var(--line);margin-bottom:4px;padding-bottom:4px}
+.menu .all a{font-weight:600;color:var(--accent)}
+@media(max-width:1150px){.chev{display:none}}
+@media(max-width:900px){.catnav{display:none}.divider{display:none}.hamburger{display:block}}
+</style>

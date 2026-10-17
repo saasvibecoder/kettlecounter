@@ -1,0 +1,35 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Hero from "../components/Hero.astro";
+import SubNicheGrid from "../components/SubNicheGrid.astro";
+import { categories } from "../data/menu";
+---
+<BaseLayout title="KettleCounter — Find the Best Kitchen Gear on Amazon">
+  <Hero />
+
+  <section class="wrap" id="picks">
+    <h2>Browse by category</h2>
+    <div class="catgrid">
+      {categories.map(c => (
+        <a class="catcard" href={`/${c.slug}/`}>
+          <h3>{c.name}</h3>
+          <p>{c.subs.slice(0,3).join(", ")}</p>
+          <span>Browse &rarr;</span>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  {categories.map(c => <SubNicheGrid slug={c.slug} />)}
+</BaseLayout>
+
+<style>
+section{padding:40px 20px}
+h2{font-size:28px;margin:0 0 18px}
+.catgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:16px}
+.catcard{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px;text-decoration:none;color:var(--ink);display:flex;flex-direction:column;gap:4px}
+.catcard:hover{border-color:var(--accent)}
+.catcard h3{margin:0;font-size:17px}
+.catcard p{margin:0;color:var(--mute);font-size:13px}
+.catcard span{margin-top:8px;font-size:13px;color:var(--accent);font-weight:600}
+</style>

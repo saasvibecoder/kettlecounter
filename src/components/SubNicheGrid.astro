@@ -1,0 +1,43 @@
+---
+import { categories } from "../data/menu";
+import ArticlePreviewGrid from "./ArticlePreviewGrid.astro";
+interface Props { slug: string; }
+const { slug } = Astro.props;
+const cat = categories.find(c => c.slug === slug);
+const toSlug = (s: string) => s.toLowerCase().replace(/\s+/g, "-");
+---
+{cat && (
+  <section class="band">
+    <div class="wrap">
+      <h2>{cat.name}</h2>
+      <p class="lead">Our top {cat.name.toLowerCase()} picks, reviewed and compared.</p>
+      <div class="subgrid">
+        {cat.subs.map(s => (
+          <a class="subcard" href={`/${cat.slug}/${toSlug(s)}/`}>
+            <div class="thumb" aria-hidden="true"></div>
+            <h3>{s}</h3>
+            <span>See picks &rarr;</span>
+          </a>
+        ))}
+      </div>
+      <ArticlePreviewGrid slug={cat.slug} />
+    </div>
+  </section>
+)}
+<style>
+.band{background:var(--card);padding:56px 0}
+.band + .band{border-top:4px solid transparent;border-image:linear-gradient(90deg,#0a0a0a,#8a1414,#d94f16,#f2b33d) 1}
+.band .wrap{padding:0 10px}
+.band h2{font-size:28px;margin:0 0 6px}
+.lead{color:var(--mute);margin:0 0 20px}
+.subgrid{display:grid;grid-template-columns:repeat(5,1fr);gap:16px}
+.subcard{background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:16px;text-decoration:none;color:var(--ink);display:flex;flex-direction:column;gap:8px;min-width:0}
+.subcard:hover,.subcard:focus-visible{border-color:var(--accent)}
+.thumb{width:100%;height:90px;border-radius:8px;background:var(--card);border:1px solid var(--line)}
+.subcard h3{margin:0;font-size:16px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.subcard span{font-size:13px;color:var(--accent);font-weight:600}
+@media(max-width:900px){
+  .subgrid{grid-auto-flow:column;grid-auto-columns:70%;grid-template-columns:none;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:6px}
+  .subcard{scroll-snap-align:start}
+}
+</style>

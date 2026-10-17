@@ -1,0 +1,14 @@
+---
+import SocialIcons from "./SocialIcons.astro";
+---
+<div class="topbar wrap">
+  <SocialIcons size="sm" />
+  <form class="search" role="search"><input type="search" placeholder="Search products…" aria-label="Search"/><button type="submit" aria-label="Search">🔍</button></form>
+</div>
+<style>
+.topbar{display:flex;justify-content:space-between;align-items:center;padding:8px 20px;font-size:13px;color:var(--mute)}
+.search{display:flex;border:1px solid var(--line);border-radius:8px;overflow:hidden;background:var(--card)}
+.search input{border:0;background:transparent;padding:6px 10px;font-size:13px;color:var(--ink);width:180px}
+.search button{border:0;background:transparent;padding:0 10px;cursor:pointer}
+@media(max-width:600px){.search input{width:110px}}
+</style>

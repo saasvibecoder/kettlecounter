@@ -1,0 +1,63 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Sidebar from "../../components/Sidebar.astro";
+import ArticlePreviewGrid from "../../components/ArticlePreviewGrid.astro";
+import { categories } from "../../data/menu";
+
+export function getStaticPaths() {
+  return categories.map(c => ({
+    params: { category: c.slug },
+    props: { cat: c },
+  }));
+}
+
+const { cat } = Astro.props;
+const toSlug = (s: string) => s.toLowerCase().replace(/\s+/g, "-");
+---
+<BaseLayout
+  title={`${cat.name} Reviews — KettleCounter`}
+  description={`${cat.subs.join(", ")}, reviewed and compared.`}
+>
+  <div class="catpage">
+    <Sidebar />
+    <main class="main">
+      <nav class="crumbs" aria-label="Breadcrumb">
+        <a href="/">Home</a><span>/</span><span aria-current="page">{cat.name}</span>
+      </nav>
+
+      <h1>{cat.name}</h1>
+      <p class="intro">Our picks for {cat.name.toLowerCase()}, reviewed and compared. Every review links straight to Amazon.</p>
+
+      <div class="subgrid">
+        {cat.subs.map((s: string) => (
+          <a class="subcard" href={`/${cat.slug}/${toSlug(s)}/`}>
+            <div class="thumb" aria-hidden="true"></div>
+            <h3>{s}</h3>
+            <span>See picks &rarr;</span>
+          </a>
+        ))}
+      </div>
+
+      <ArticlePreviewGrid slug={cat.slug} />
+    </main>
+  </div>
+</BaseLayout>
+
+<style>
+.catpage{display:flex;align-items:flex-start}
+.main{flex:1;padding:28px 20px 60px;max-width:1000px}
+.crumbs{display:flex;gap:6px;align-items:center;font-size:13px;color:var(--mute);margin:0 0 18px}
+.crumbs a{color:var(--mute);text-decoration:none}
+.crumbs a:hover{color:var(--accent)}
+.crumbs span{opacity:.6}
+.crumbs [aria-current]{color:var(--ink);font-weight:600;opacity:1}
+h1{font-size:clamp(28px,4.5vw,42px);margin:0 0 12px}
+.intro{color:var(--mute);max-width:65ch;margin:0 0 28px}
+.subgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:16px;margin-bottom:10px}
+.subcard{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px;text-decoration:none;color:var(--ink);display:flex;flex-direction:column;gap:8px}
+.subcard:hover,.subcard:focus-visible{border-color:var(--accent)}
+.thumb{width:100%;height:90px;border-radius:8px;background:var(--bg);border:1px solid var(--line)}
+.subcard h3{margin:0;font-size:16px}
+.subcard span{font-size:13px;color:var(--accent);font-weight:600}
+@media(max-width:800px){.catpage{flex-direction:column}}
+</style>
