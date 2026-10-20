@@ -1,0 +1,59 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import Sidebar from "../../../components/Sidebar.astro";
+import ReviewArticle from "../../../components/ReviewArticle.astro";
+import { categories } from "../../../data/menu";
+
+export async function getStaticPaths() {
+  const toSlug = (s: string) => s.toLowerCase().replace(/\s+/g, "-");
+  const entries = await getCollection("reviews");
+  const catBySlug = new Map(categories.map(c => [c.slug, c]));
+  return entries.map(e => {
+    const cat = catBySlug.get(e.data.category);
+    return {
+      params: { category: e.data.category, subniche: toSlug(e.data.subNiche), product: e.data.slug },
+      props: { entry: e, catName: cat?.name ?? e.data.category, catSlug: e.data.category, subSlug: toSlug(e.data.subNiche) },
+    };
+  });
+}
+
+const { entry, catName, catSlug, subSlug } = Astro.props;
+const data = entry.data;
+---
+<BaseLayout title={`${data.title} — KettleCounter`} description={data.hook}>
+  <div class="catpage">
+    <Sidebar />
+    <main class="main">
+      <ReviewArticle
+        categoryName={catName} categorySlug={catSlug}
+        subNiche={data.subNiche} subSlug={subSlug}
+        productName={data.productName}
+        title={data.title} hook={data.hook}
+        intro={data.intro}
+        whatIsIt={data.whatIsIt}
+        featuresIntro={data.featuresIntro}
+        features={data.features}
+        productDescription={data.productDescription}
+        prosConsIntro={data.prosConsIntro}
+        pros={data.pros}
+        cons={data.cons}
+        customerSummary={data.customerSummary}
+        whyBuyIt={data.whyBuyIt}
+        verdict={data.verdict}
+        ctaText={data.ctaText}
+        amazonUrl={data.amazonUrl ?? "#"}
+      />
+      <p class="back"><a href={`/${catSlug}/${subSlug}/`}>&larr; See all {data.subNiche} reviews</a></p>
+    </main>
+  </div>
+</BaseLayout>
+
+<style>
+.catpage{display:flex;align-items:flex-start}
+.main{flex:1;padding:28px 20px 60px}
+.back{max-width:760px;margin-top:20px}
+.back a{color:var(--accent);text-decoration:none;font-size:14px;font-weight:600}
+.back a:hover{text-decoration:underline}
+@media(max-width:800px){.catpage{flex-direction:column}}
+</style>
